@@ -20,7 +20,9 @@ export class HomePage {
     const loading = await this.loadingController.create({
       message: 'Loading...',
     });
-    await loading.present();
+    if (!this.posts.length) {
+      await loading.present();
+    }
 
     this.http
       .get(
@@ -30,5 +32,9 @@ export class HomePage {
         this.posts = data['posts'];
         loading.dismiss();
       });
+  }
+
+  trackByFn(index: number, item: Post): number {
+    return item.ID;
   }
 }
