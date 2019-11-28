@@ -5,9 +5,9 @@ import { ArticlePage } from './article.page';
 
 const routes: Routes = [
   {
-    path: '',
-    component: ArticlePage
-  }
+    path: ':articleId',
+    component: ArticlePage,
+  },
 ];
 
 @NgModule({
