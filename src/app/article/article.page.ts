@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Post } from '../models/post';
 
 @Component({
   selector: 'app-article',
@@ -9,12 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ArticlePage implements OnInit {
   ID: number;
-  post: {
-    ID: number;
-    title: string;
-    content: string;
-    date: string;
-  } = {
+  post: Post = {
     ID: null,
     title: null,
     content: null,
@@ -34,12 +30,7 @@ export class ArticlePage implements OnInit {
 
   ionViewDidEnter() {
     this.http
-      .get<{
-        ID: number;
-        title: string;
-        content: string;
-        date: string;
-      }>(
+      .get<Post>(
         'https://public-api.wordpress.com/rest/v1.1/sites/ionicjp.wordpress.com/posts/' +
           this.ID,
       )

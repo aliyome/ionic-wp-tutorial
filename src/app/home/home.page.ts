@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LoadingController } from '@ionic/angular';
+import { Post } from '../models/post';
 
 @Component({
   selector: 'app-home',
@@ -8,12 +9,7 @@ import { LoadingController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  posts: {
-    ID: number;
-    title: string;
-    content: string;
-    date: string;
-  }[] = [];
+  posts: Post[] = [];
 
   constructor(
     private readonly http: HttpClient,
