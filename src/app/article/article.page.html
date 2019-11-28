@@ -1,9 +1,20 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>article</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>記事詳細</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>
+        {{post.date | date: 'yyyy/MM/dd'}}
+      </ion-card-subtitle>
+      <ion-card-title>{{post.title}}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <div class="ion-padding">{{post.content}}</div>
 </ion-content>

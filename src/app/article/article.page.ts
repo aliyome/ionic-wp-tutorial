@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-article',
@@ -6,7 +8,43 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./article.page.scss'],
 })
 export class ArticlePage implements OnInit {
-  constructor() {}
+  ID: number;
+  post: {
+    ID: number;
+    title: string;
+    content: string;
+    date: string;
+  } = {
+    ID: null,
+    title: null,
+    content: null,
+    date: null,
+  };
 
-  ngOnInit() {}
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly http: HttpClient,
+  ) {}
+
+  ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.ID = parseInt(params.get('articleId'), 10);
+    });
+  }
+
+  ionViewDidEnter() {
+    this.http
+      .get<{
+        ID: number;
+        title: string;
+        content: string;
+        date: string;
+      }>(
+        'https://public-api.wordpress.com/rest/v1.1/sites/ionicjp.wordpress.com/posts/' +
+          this.ID,
+      )
+      .subscribe(data => {
+        this.post = data;
+      });
+  }
 }
