@@ -16,5 +16,5 @@
       <ion-card-title>{{post.title}}</ion-card-title>
     </ion-card-header>
   </ion-card>
-  <div class="ion-padding">{{post.content}}</div>
+  <div class="ion-padding" [innerHTML]="post.content"></div>
 </ion-content>
