@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { LoadingController } from '@ionic/angular';
 import { Post } from '../models/post';
+import { WordpressService } from '../wordpress.service';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +12,7 @@ export class HomePage {
   posts: Post[] = [];
 
   constructor(
-    private readonly http: HttpClient,
+    private readonly wordpress: WordpressService,
     private readonly loadingController: LoadingController,
   ) {}
 
@@ -24,14 +24,10 @@ export class HomePage {
       await loading.present();
     }
 
-    this.http
-      .get(
-        'http://public-api.wordpress.com/rest/v1.1/sites/ionicjp.wordpress.com/posts/',
-      )
-      .subscribe(data => {
-        this.posts = data['posts'];
-        loading.dismiss();
-      });
+    this.wordpress.getPosts().subscribe(data => {
+      this.posts = data['posts'];
+      loading.dismiss();
+    });
   }
 
   trackByFn(index: number, item: Post): number {

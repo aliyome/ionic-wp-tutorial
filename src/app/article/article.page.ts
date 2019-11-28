@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { Post } from '../models/post';
+import { WordpressService } from '../wordpress.service';
 
 @Component({
   selector: 'app-article',
@@ -19,7 +19,7 @@ export class ArticlePage implements OnInit {
 
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly http: HttpClient,
+    private readonly wordpress: WordpressService,
   ) {}
 
   ngOnInit() {
@@ -29,13 +29,8 @@ export class ArticlePage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.http
-      .get<Post>(
-        'https://public-api.wordpress.com/rest/v1.1/sites/ionicjp.wordpress.com/posts/' +
-          this.ID,
-      )
-      .subscribe(data => {
-        this.post = data;
-      });
+    this.wordpress.getArticle(this.ID).subscribe(data => {
+      this.post = data;
+    });
   }
 }
