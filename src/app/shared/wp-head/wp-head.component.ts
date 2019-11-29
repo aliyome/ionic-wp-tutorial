@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-wp-head',
@@ -6,9 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./wp-head.component.scss'],
 })
 export class WpHeadComponent implements OnInit {
+  @Input()
+  title: string;
+  @Input()
+  date: string;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {}
-
 }

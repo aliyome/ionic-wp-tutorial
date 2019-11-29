@@ -9,12 +9,7 @@
 
 <ion-content>
   <ion-card *ngIf="post.ID; else skelton">
-    <ion-card-header>
-      <ion-card-subtitle>
-        {{post.date | date: 'yyyy/MM/dd'}}
-      </ion-card-subtitle>
-      <ion-card-title>{{post.title}}</ion-card-title>
-    </ion-card-header>
+    <app-wp-head [title]="post.title" [date]="post.date"></app-wp-head>
   </ion-card>
   <ng-template #skelton>
     <ion-card>
